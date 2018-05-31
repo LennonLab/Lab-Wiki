@@ -1,0 +1,333 @@
+@import "../mf-mixins.less";
+
+.mw-mf-image-replacement {
+	font-style: italic;
+	color: #706E6E;
+	text-decoration: underline;
+	border: dotted 1px #CCC;
+	padding: 10px;
+	display: inline-block;
+}
+
+/* FIXME: make our own customized rest CSS and move it there */
+input, textarea, button {
+	font-size: 100%;
+	font-family: inherit;
+}
+
+input {
+	word-break: normal;
+}
+
+textarea {
+	padding: 5px 0 5px 5px;
+}
+
+input:not([type=submit]), textarea {
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+button.disabled {
+	opacity: 0.2;
+}
+
+a.external {
+	background: url(images/external-link-ltr-icon.png) center right no-repeat;
+	padding-right: 13px;
+}
+
+#mw-mf-edit-page-link {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.info {
+	margin: @infoMargin;
+	color: @infoColor;
+
+	img {
+		width: 100%;
+		max-width: 600px;
+	}
+
+	.button {
+	 	margin: 2em 0 0;
+	}
+}
+
+.loading {
+	background-image: url(images/ajax-loader.gif);
+	min-height: 48px;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	&.content {
+		padding-top: 48px;
+		text-align: center;
+		background-position: 50% 0;
+	}
+}
+
+.progress-bar {
+	width: 100%;
+	height: 8px;
+	border: 1px solid #9ea0a3;
+	.boxshadow( inset, 0, 0, 4px, #bbb );
+
+	.value {
+		width: 0;
+		height: 100%;
+		background: @blueBase;
+	}
+}
+
+/* Galleries */
+/* See https://www.mediawiki.org/wiki/Help:Images#Rendering_a_gallery_of_images */
+ul.gallery {
+	list-style: none;
+	margin: 2px;
+	padding: 2px;
+	display: block;
+
+	li.gallerycaption {
+		font-weight: bold;
+		text-align: center;
+		display: block;
+		word-wrap: break-word;
+	}
+
+	li.gallerybox {
+		display: inline-block;
+
+		div.thumb {
+			text-align: center;
+			border: 1px solid #ccc;
+			background-color: #f9f9f9;
+			margin: 2px;
+
+			img {
+				display: block;
+				margin: 0 auto;
+			}
+		}
+
+		div.gallerytext {
+			overflow: hidden;
+			padding: 2px 4px;
+			word-wrap: break-word;
+		}
+	}
+}
+
+.mwm-message.mwm-notice {
+	background: #FFFFFF;
+	font-size: 1.1em;
+	color: #000000;
+}
+.mwm-message.mwm-notice a {
+	text-decoration: underline;
+	font-weight: bold;
+	color: #000000;
+}
+
+.mwm-notice {
+	padding: 5px;
+	background: #dddddd;
+	-webkit-border-radius: 5px;
+	margin-top: 5px;
+	text-align: center;
+	border: 1px solid gray;
+}
+
+#content {
+	position: relative; // allow absolute positioned children e.g. edit link
+}
+
+#content table {
+	/* following 5 rules are needed for scrolling */
+	overflow: auto; /* for browsers that don't support overflow-y */
+	overflow-y: hidden;
+	overflow-x: auto;
+	word-break: normal;
+	display: block;
+}
+
+table {
+	.box-sizing( border-box );
+
+	tbody {
+		display: inline-block;
+	}
+
+	td,
+	th {
+		padding: 3px;
+	}
+
+	th {
+		word-break: normal;
+	}
+
+	&.wikitable {
+		th {
+			background: #f3f3f3;
+		}
+	}
+
+	table {
+		border: 0;
+		margin-bottom: 0;
+
+		td,
+		th {
+			border: 0;
+			padding: 0;
+		}
+	}
+}
+
+p,
+li,
+dl,
+#mainpage,
+#featured_article {
+	line-height: 1.65;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+a {
+	text-decoration: none;
+	color: #002bb8;
+}
+
+a:visited {
+	color: #5a3696;
+}
+
+a:active {
+	color: #faa700;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.new,
+a.new:visited,
+a.new:hover {
+	color: red;
+}
+
+#contentSub {
+	margin-bottom: 10px;
+}
+
+#featured_article .noprint,
+.today .noprint {
+	display: none;
+}
+
+img.thumbborder {
+	border: 1px solid #cccccc;
+}
+
+/* @noflip */div.floatright, table.floatright {
+	float: right;
+}
+
+/* @noflip */div.floatleft, table.floatright {
+	float: left;
+}
+
+#content_wrapper.home h1 {
+	display: none;
+}
+
+#mw-mf-last-modified {
+	display: block;
+	font-size: .9em;
+	margin-top: 1.5em;
+}
+
+#disableButtons {
+	text-align: center;
+}
+
+#disableButtons button {
+	background: url(images/buttonbg.gif) no-repeat center;
+	border: 0;
+	height: 23px;
+	width: 83px;
+}
+
+#disableButtons #backButton {
+	margin-top: 5em;
+	margin-bottom: 2em;
+}
+
+.mwm-message.mwm-notice {
+	font-size: 1.1em;
+}
+
+#image_wrapper {
+	margin: 8px 0 8px -3px;
+}
+
+@media all and (max-width: 500px) {
+	.mobile div.tleft,
+	.mobile div.floatleft,
+	.mobile table.floatleft,
+	.mobile div.tright,
+	.mobile div.floatright,
+	.mobile table.floatright {
+		float: none;
+		clear: none;
+		margin: auto;
+		width: auto !important;
+	}
+}
+
+/* Plainlinks - this can be used to switch
+ * off special external link styling */
+.plainlinks a {
+	background: none !important;
+	padding: 0 !important;
+}
+
+strong,
+b {
+	font-weight: bold;
+}
+
+.hlist > ul, // FIXME: to support hlists on enwiki projects - this should be deprecated
+ul.hlist {
+	li {
+		display: inline-block;
+		margin-right: 8px;
+	}
+}
+
+ul {
+	list-style: square inside;
+}
+
+ol {
+	list-style: decimal inside;
+}
+
+i {
+	font-style: italic;
+}
+
+.jsonly {
+	display: none;
+}
+
+.client-js .jsonly {
+	display: block;
+}

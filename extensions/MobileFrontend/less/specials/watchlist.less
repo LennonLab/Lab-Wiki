@@ -1,0 +1,136 @@
+@import "../mf-mixins.less";
+
+.mw-mf-watchlist-selector {
+	border-bottom: 1px solid #e2e2e2;
+
+	li {
+		text-align: center;
+		display: inline-block;
+		border-left: 1px solid #e2e2e2;
+		width: 25%;
+		margin: 0 0 0 -1px;
+
+		&.selected a {
+			font-weight: bold;
+			border-bottom-color: #3366bb;
+		}
+
+		a {
+			display: block;
+			color: #58595b;
+			padding: 5px 0 0;
+			margin: 0 1px 0 0;
+			border-bottom: 3px solid transparent;
+		}
+	}
+}
+
+@thumbWidth: 70px;
+@thumbSpace: @thumbWidth + 15px;
+@ragWidth: 8px;
+
+ul.mw-mf-watchlist-results {
+	list-style: none;
+
+	li {
+		border-bottom: solid 1px #e2e2e2;
+		color: #808080;
+		line-height: 1;
+		position: relative;
+
+		.listThumb {
+			position: absolute;
+			background-repeat: no-repeat;
+			background-position: center center;
+			width: @thumbWidth;
+			height: 100%;
+			margin: 0 0 0 -@thumbSpace;
+		}
+
+		.listThumbH {
+			.background-size(auto, 100%);
+		}
+
+		.listThumbV {
+			.background-size(100%, auto);
+		}
+
+		a.title {
+			display: block;
+			position: relative;
+			padding: 0 @contentMarginRight @articleListPaddingTop @contentMarginLeft;
+			margin: -1px 0;
+			border-left: @ragWidth solid transparent;
+			/* FIXME: remove if we reset text-decoration in common styles */
+			text-decoration: none;
+		}
+
+		a:active {
+			border-left-color: #3366bb;
+			.background-alpha(232, 232, 233, .5);
+		}
+
+		div, p {
+			font-size: .9em;
+			margin: 0;
+			color: #999b9e;
+		}
+
+		p {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			-webkit-text-overflow: ellipsis;
+			overflow: hidden;
+			line-height: 1;
+			margin: .25em 0 0;
+		}
+
+		h2 {
+			.watchlist-heading();
+			// 22px is the width of the watchlist star, +2px for additional padding
+			padding: 20px 24px 0 0;
+		}
+
+		.info {
+			color: #a6a6a6;
+			font-size: .7em;
+			text-transform: uppercase;
+			margin: .6em 0 0;
+		}
+
+		.mw-mf-user {
+			margin: .5em 0 0;
+		}
+	}
+}
+
+ul.a-to-z {
+	li {
+		a.title {
+			padding-left: (@thumbSpace - @ragWidth);
+		}
+
+		.listThumb.needsPhoto {
+			background-image: url(images/camera.png);
+			.background-size( 50%, auto );
+		}
+	}
+}
+
+.mw-mf-user {
+	padding: 1px 0 0 20px;
+	color: #565656 !important;
+	background: url(images/user.png) 0 -2px no-repeat;
+	.background-size(16px, 16px);
+}
+
+.mw-mf-anon {
+	color: #b24242;
+	background-image: url(images/user-anon.png);
+}
+
+a.more {
+	display: block;
+	margin-top: 1em;
+	text-align: center;
+}

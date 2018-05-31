@@ -1,0 +1,52 @@
+a.mw-mf-cleanup {
+  display: block;
+  padding: 10px 15px 10px 44px;
+  background-image: url(images/issues-blue.png);
+  background-repeat: no-repeat;
+  margin-bottom: 4px;
+  /* use -webkit prefix for older android browsers eg. nexus 1 */
+
+  -moz-background-size: 24px 24px;
+  -o-background-size: 24px 24px;
+  -webkit-background-size: 24px 24px;
+  background-size: 24px 24px;
+  background-position: 10px center;
+}
+a.mw-mf-cleanup:hover {
+  background-image: url(images/issues-gray.png);
+  text-decoration: none;
+  color: #565656;
+  background-color: #f0f0f0;
+}
+/* styling for warning boxes (see bug 36674)*/
+td.mbox-image div {
+  width: 100% !important;
+}
+.mbox-text div {
+  text-align: center !important;
+}
+th.mbox-text,
+td.mbox-text,
+td.mbox-image {
+  display: block;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center !important;
+}
+td.mbox-image div,
+th.mbox-text,
+td.mbox-text,
+td.mbox-image,
+table.ambox-content {
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+table.ambox-content {
+  border-left: 1px solid #AAA;
+  border-bottom: 10px solid #F28500;
+}
