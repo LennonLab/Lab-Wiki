@@ -29,9 +29,9 @@ $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
 # Error Reporting
-error_reporting( E_ALL );
-ini_set( 'display_errors', 1);
-$wgDebugLogFile = "/ip/lennon/LennonWiki-debug_log.txt";
+# error_reporting( E_ALL );
+# ini_set( 'display_errors', 1);
+# $wgDebugLogFile = "/ip/lennon/LennonWiki-debug_log.txt";
 
 # Load Default Settings
 require_once( "$IP/includes/DefaultSettings.php" );
@@ -68,9 +68,9 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "mysql.iu.edu:3745";
-$wgDBname           = "wikidb2";
-$wgDBuser           = "wikiuser";
+$wgDBserver         = "mysql.uits.iu.edu:3306";
+$wgDBname           = "lennon_wikidb2";
+$wgDBuser           = "lennon_wikiuser";
 $wgDBpassword       = "easy23";
 
 # MySQL specific settings
@@ -134,7 +134,7 @@ $wgRightsText       = "GNU Free Documentation License 1.2";
 $wgRightsIcon       = "${wgScriptPath}/skins/common/images/gnu-fdl.png";
 # $wgRightsCode = "gfdl"; # Not yet used
 
-$wgLogo             = "/~lennon/skins/common/images/Synechococcus_infected_by_virus.png";
+$wgLogo             = "/~lennon/images/Synechococcus_infected_by_virus.png";
 
 $wgThumbLimits = array(
         120,
@@ -204,15 +204,31 @@ if (is_file("/etc/mediawiki-extensions/extensions.php")) {
 $wgCacheEpoch = max( $wgCacheEpoch, gmdate( 'YmdHis', @filemtime( __FILE__ ) ) );
 
 # Extensions
-require_once("$IP/extensions/articletocategory.php");
-require_once("$IP/extensions/ParserFunctions.php");
-require_once("$IP/extensions/DynamicFunctions.php");
-require_once("$IP/extensions/addfiletoarticle.php");
-require_once("$IP/extensions/UserFunctions/UserFunctions.php");
-#require_once("$IP/extensions/videoflash.php");
-require_once("$IP/extensions/NoTitle/NoTitle.php");
-require_once("$IP/extensions/Math/Math.php");
-require_once("$IP/extensions/EtherpadLite/EtherpadLite.php");
+wfLoadExtension( 'ArticleToCategory2' );
+$wgarticletocategory2ConfigBlacklist=false;
+$wgGroupPermissions['*']['ArticleToCategory2'] = true;
+$wgGroupPermissions['*']['ArticleToCategory2AddCat'] = false;
+
+wfLoadExtension( 'ParserFunctions' );
+$wgPFEnableStringFunctions = true;
+
+wfLoadExtension( 'MultiBoilerplate' );
+$wgMultiBoilerplateDiplaySpecialPage = true;
+$wgMultiBoilerplateOptions[ "Protocols" ] = "Template:Protocols";
+$wgMultiBoilerplateOptions[ "Field" ] = "Template:Field";
+$wgMultiBoilerplateOptions[ "Computer" ] = "Template:Computer";
+$wgMultiBoilerplateOptions[ "Recipes" ] = "Template:Recipes";
+$wgMultiBoilerplateOptions[ "Lab Management" ] = "Template:Lab Management";
+$wgMultiBoilerplateOptions[ "Blank" ] = "Template:Blank";
+
+# Not Working!!!!!
+#wfLoadExtension( 'DynamicFunctions' );
+#wfLoadExtension( 'addfiletoarticle' );
+#wfLoadExtension( 'UserFunctions' );
+#wfLoadExtension( 'videoflash' );
+#wfLoadExtension( 'NoTitle' );
+#wfLoadExtension( 'Math.php' );
+#wfLoadExtension( 'EtherpadLite' );
 
 
 # Exceptions for Debugging

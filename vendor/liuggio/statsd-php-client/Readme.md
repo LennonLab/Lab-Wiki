@@ -1,16 +1,29 @@
 ## statsd-php-client
 
-Be careful, see the [Upgrading section](Readme.md#upgrade) for <= v1.0.4, there's a BC.
-
 [![Build Status](https://secure.travis-ci.org/liuggio/statsd-php-client.png)](http://travis-ci.org/liuggio/statsd-php-client) [![Latest Stable Version](https://poser.pugx.org/liuggio/statsd-php-client/v/stable.png)](https://packagist.org/packages/liuggio/statsd-php-client) [![Total Downloads](https://poser.pugx.org/liuggio/statsd-php-client/downloads.png)](https://packagist.org/packages/liuggio/statsd-php-client)
 
 `statsd-php-client` is an Open Source, and **Object Oriented** Client for **etsy/statsd** written in php
+ 
+### Install with composer
 
-- `StatsdDataFactory` creates the `Liuggio\StatsdClient\Entity\StatsdDataInterface` Objects
+```bash
+composer require liuggio/statsd-php-client
+```
 
-- `Sender` just sends data over the network (there are many sender)
+### Simple Usage
 
-- `StatsdClient` sends the created objects via the `Sender` to the server
+```php
+$statsd = new StatsdService();
+
+$service->timing('usageTime', 100);
+$service->increment('visitor');
+$service->decrement('click');
+$service->gauge('gaugor', 333);
+$service->set('uniques', 765);
+
+$service->flush();
+```
+
 
 ## Why use this library instead the [statsd/php-example](https://github.com/etsy/statsd/blob/master/examples/php-example.php)?
 
@@ -29,41 +42,30 @@ Be careful, see the [Upgrading section](Readme.md#upgrade) for <= v1.0.4, there'
 - You do want to debug the packets, and using `SysLogSender` the packets will be logged in your `syslog` log (on debian-like distro: `tail -f /var/log/syslog`)
 
 
-## Example
-
-1. create the Sender
-
-2. create the Client
-
-3. create the Factory
-
-4. the Factory will help you to create data
-
-5. the Client will send the data
-
-### Standard Usage
+### Advanced Instantiation
 
 ```php
 use Liuggio\StatsdClient\StatsdClient,
     Liuggio\StatsdClient\Factory\StatsdDataFactory,
-    Liuggio\StatsdClient\Sender\SocketSender;
+    Liuggio\StatsdClient\Sender\SocketSender,
+    Liuggio\StatsdClient\Service\StatsdService;
 // use Liuggio\StatsdClient\Sender\SysLogSender;
 
 $sender = new SocketSender(/*'localhost', 8126, 'udp'*/);
 // $sender = new SysLogSender(); // enabling this, the packet will not send over the socket
 
-$client = new StatsdClient($sender);
+$client  = new StatsdClient($sender);
 $factory = new StatsdDataFactory('\Liuggio\StatsdClient\Entity\StatsdData');
+$service = new StatsdService($client, $factory);
 
-// create the data with the factory
-$data[] = $factory->timing('usageTime', 100);
-$data[] = $factory->increment('visitor');
-$data[] = $factory->decrement('click');
-$data[] = $factory->gauge('gaugor', 333);
-$data[] = $factory->set('uniques', 765);
+// create the metrics with the service
+$service->timing('usageTime', 100);
 
-// send the data as array or directly as object
-$client->send($data);
+//...
+
+// send the data to statsd
+$service->flush();
+
 ```
 
 ### Usage with Monolog
@@ -89,9 +91,6 @@ $logger->addInfo('My logger is now ready');
 ```
 
 the output will be:  `prefix.my_logger.INFO.My-logger:1|c" 36 Bytes`
-
-
-
 
 ## Short Theory
 
@@ -139,11 +138,6 @@ composer.phar install
 phpunit --coverage-html reports
 ```
 
-## Upgrade
+## Core developers:
 
-BC from the v1.0.4 version, [see Sender and Client differences](https://github.com/liuggio/statsd-php-client/pull/5/files).
-
-
-## TODO
-
-example with monolog
+This project is actively mantained by David Moreau AKA @dav-m85 and @liuggio
